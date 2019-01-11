@@ -40,3 +40,52 @@ class Queue
         self.queue_var[-1]
     end
 end
+
+class Map
+    attr_accessor :map_var
+    def initialize 
+        @map_var = [[]]
+    end
+    # updates existing key to given value or creates new key value pair
+    def set(key, value)
+        updated = false
+        if self.map_var[0].empty?
+            self.map_var[0] = [key, value]
+            updated = true
+        else  
+            self.map_var.each do |pair| 
+                if pair[0] == key  
+                  pair[1] = value 
+                  updated = true
+                end
+            end 
+        end
+        self.map_var << [key, value] if !updated
+        updated   
+    end
+    # returns value corresponding to given key
+    def get(key)
+        self.map_var.each do |pair|
+            return pair[1] if pair[0] == key
+        end
+        nil
+    end
+    # deletes key value pair
+    def delete(key)
+        self.map_var.each_with_index do |pair, idx|
+            if pair[0] == key 
+                first_half = self.map_var[0...idx] 
+                second_half = self.map_var[idx+1..-1]
+                self.map_var = first_half + second_half
+                break
+            end 
+        end
+    end
+    # displays whole map?
+    def show
+        self.map_var.each do |pair|
+            display = "#{pair[0]} => #{pair[1]}"
+            puts display
+        end
+    end
+end
