@@ -1,0 +1,31 @@
+<h2>Check out all the bands!</h2>
+<a href="<%=new_band_url%>">Add a band</a>
+
+<br><br>
+
+<div>
+    <% if current_user.nil? %>
+      <a href="<%= new_session_url %>">Sign in</a>
+      <br><br>
+      <a href="<%= new_user_url %>">Sign up</a>
+    <% else %>
+      <form action="<%= session_url %>" method="post">
+        <%=auth_token%>
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Logout">
+      </form>
+    <% end %>
+    </div>
+
+<section>
+  <%@bands.each do |band|%>
+    <h3><%=band.name%></h3>
+    <a href="<%=band_url(band)%>">Visit this band's page</a>
+    <br><br>
+  <%end%>
+</section>
+ <section>
+  <% if flash[:errors] %>
+  <%= flash[:errors] %>
+  <% end %>
+  </section>

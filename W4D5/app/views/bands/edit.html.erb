@@ -1,0 +1,27 @@
+<h2>Edit your band</h2>
+
+<form action="<%=band_url(@band)%>" method="post">
+<input type="hidden" name="_method" value="patch">
+
+  <%=auth_token%>
+  <label for="band_name">Band Name:</label>
+  <input id="band_name" type="text" name="band[name]" value="<%=@band.name%>">
+
+  <input type="submit" value="Change Band Name">
+
+  <br><br>
+    <a href="<%=band_url(@band)%>">Discard changes</a>
+  <br><br>
+    <a href="<%=bands_url%>">See all bands!</a>
+  <br><br>
+    <form action ="<%=band_url(@band)%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+      <%=auth_token%>
+      <input type="submit" value ="Delete this band">
+    </form>
+    <% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+   <%= error %><br />
+  <% end %>
+<% end %>
+</form>

@@ -1,0 +1,11 @@
+
+<h2><%=@band.name%></h2>
+
+<a href="<%=edit_band_url(@band)%>">Edit band</a>
+<br><br>
+<a href="<%=bands_url%>">Return to all bands</a>
+ <section>
+  <% if flash[:errors] %>
+  <%= flash[:errors] %>
+  <% end %>
+  </section>
